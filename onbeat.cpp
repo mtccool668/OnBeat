@@ -50,12 +50,12 @@ int main(int argc, char* argv[]) {
 	Button button(renderer, buttonDefaultTexture, buttonHoverTexture, 100, 100, 200, 100);
 	
 	
-	/*gpress = Mix_LoadWAV("sounds/drum_click.wav");
+	gpress = Mix_LoadWAV("sounds/drum_click.wav");
 	Metronome m1(60);
 	m1.sendMsg();
 	int bpm = m1.trackBPM();
 	m1.playMetronome(bpm, gpress);
-	*/
+	
 	
 
 	bool quit = false;

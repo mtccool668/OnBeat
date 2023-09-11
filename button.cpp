@@ -29,15 +29,15 @@ Button::~Button() {
 
 void Button::render() {
 	SDL_Rect dstRect = { x, y, w, h };
-	SDL_Texture* textureToRender = (isHovered) ? hoverButton : defaultButton;
+	SDL_Texture* textureToRender = (hovered) ? hoverButton : defaultButton;
 	SDL_RenderCopy(renderer, textureToRender, nullptr, &dstRect);
 }
 
-bool Button::isClicked(int mouseX, int mouseY) const {
+bool Button::isHovered(int mouseX, int mouseY) const {
 	return (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h);
 }
 void Button::handleMouseHover(int mouseX, int mouseY) {
-	isHovered = (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h);
+	hovered = (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h);
 }
 
 SDL_Texture* Button::loadTexture(const std::string& texturePath) {

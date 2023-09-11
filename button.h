@@ -10,7 +10,7 @@ public:
 	~Button();
 	
 	void render();
-	bool isClicked(int mouseX, int mouseY) const;
+	bool isHovered(int mouseX, int mouseY) const;
 	void handleMouseHover(int mouseX, int mouseY);
 	SDL_Texture* loadTexture(const std::string& imagePath);
 
@@ -21,7 +21,7 @@ private:
 	SDL_Texture* defaultButton;
 	SDL_Texture* hoverButton;
 	int x, y, w, h;
-	bool isHovered;
+	bool hovered;
 
 };
 

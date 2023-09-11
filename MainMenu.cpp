@@ -1,6 +1,6 @@
 #include "MainMenu.h"
 
-MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& imgPath) : Screen(renderer, imgPath), imgPath(imgPath) {
+MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& imgPath) : Screen(renderer, imgPath), renderer(renderer), imgPath(imgPath) {
     SDL_Surface* bkgSurface = IMG_Load(imgPath.c_str());
     if (!renderer) {
         printf("can't use renderer");
@@ -14,7 +14,28 @@ MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& imgPath) : Screen(
 
 
 void MainMenu::update() {
-    return;
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			gameRunning = false;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				mouseDown = true;
+				mousePressed = true;
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				mouseDown = false;
+			}
+			break;
+		}
+	}
 }
 
 void MainMenu::render(SDL_Renderer* renderer) {

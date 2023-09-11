@@ -23,16 +23,16 @@ int main(int argc, char* argv[]) {
 	window = getWindow();
 	renderer = getRenderer();
 
-	//Create button and load textures
+	/*Create button and load textures
+	(TEST 1)*/
 	Button button(renderer, "images/left.bmp", "images/down.bmp", 100, 100, 200, 100);
-
 	button.render();
+	
 
-
-	/*ScreenManager screenManager(renderer);
-	std::unique_ptr<Screen> loadingScreen = std::make_unique<MainMenu>();
-	screenManager.pushScreen(std::move(loadingScreen));
-	*/
+	ScreenManager screenManager(renderer);
+	std::shared_ptr<Screen> loadingScreen = std::make_shared<MainMenu>(renderer, "images/mariobkg.bmp");
+	
+	
 
 
 	/*gpress = Mix_LoadWAV("sounds/niga.wav");
@@ -71,13 +71,26 @@ int main(int argc, char* argv[]) {
 					}
 				}
 				break;
+			case SDL_KEYDOWN:
+				switch (event.key.keysym.sym) {
+				case SDLK_s:
+					screenManager.pushScreen(loadingScreen);
+					
+					break;
+				
+				case SDLK_b:
+					screenManager.popScreen();
+					break;
+				}
+				break;
+				
 			}
+
 			SDL_RenderClear(renderer);
+			screenManager.renderScreen();
 			button.render();
 			SDL_RenderPresent(renderer);
 		}
-		//screenManager.update();
-		//screenManager.render();
 	}
 
 	SDL_DestroyRenderer(renderer);

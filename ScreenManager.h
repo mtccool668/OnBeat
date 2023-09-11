@@ -6,7 +6,7 @@ class ScreenManager
 {
 public:
 	ScreenManager(SDL_Renderer* renderer);
-    void pushScreen(std::unique_ptr<Screen> screen);
+    void pushScreen(std::shared_ptr<Screen> screen);
     void popScreen();
     void updateScreen();
     void renderScreen();
@@ -15,6 +15,7 @@ public:
 
 private:
     SDL_Renderer* renderer;
-    std::stack<std::unique_ptr<Screen>> screenStack;
+    std::stack<std::shared_ptr<Screen>> screenStack;
+    
 };
 

@@ -3,8 +3,13 @@
 
 class Screen {
 public:
-    virtual void init(SDL_Renderer* renderer) = 0;
+    Screen(SDL_Renderer* renderer, const std::string& imgPath);
     virtual void update() = 0;
     virtual void render(SDL_Renderer* renderer) = 0;
     virtual void handleInput(SDL_Event& event) = 0;
+
+private:
+    SDL_Renderer* renderer;
+    const std::string& imgPath;
+    SDL_Texture* bkgTexture;
 };

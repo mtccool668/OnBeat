@@ -1,10 +1,16 @@
 #pragma once
 #include "screen.h"
 
-class MainMenuScreen : public Screen {
+class MainMenu : public Screen {
+
 public:
-    void init(SDL_Renderer* renderer) override;
+    MainMenu(SDL_Renderer* renderer, const std::string& imgPath);
     void update() override;
     void render(SDL_Renderer* renderer) override;
     void handleInput(SDL_Event& event) override;
+
+private:
+    SDL_Renderer* renderer;
+    const std::string& imgPath;
+    SDL_Texture* bkgTexture;
 };

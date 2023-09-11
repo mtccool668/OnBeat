@@ -11,8 +11,6 @@ void startGame(SDL_Window* window, SDL_Renderer* renderer);
 
 void endGame(SDL_Window* window, SDL_Renderer* renderer);
 
-void loadButtons();
-
 SDL_Window* getWindow();
 
 SDL_Renderer* getRenderer();

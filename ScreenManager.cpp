@@ -1,10 +1,13 @@
 #include "ScreenManager.h"
 
-ScreenManager::ScreenManager(SDL_Renderer* renderer) : renderer(renderer) {}
+ScreenManager::ScreenManager(SDL_Renderer* renderer) : renderer(renderer) {
+    if (!renderer) {
+        printf("can't find renderer");
+    }
+}
 
-void ScreenManager::pushScreen(std::unique_ptr<Screen> screen) {
-    screen->init(renderer);
-    screenStack.push(std::move(screen));
+void ScreenManager::pushScreen(std::shared_ptr<Screen> screen) {
+    screenStack.push(screen);
 }
 
 void ScreenManager::popScreen() {

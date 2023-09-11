@@ -1,18 +1,28 @@
 #include "MainMenu.h"
 
-
-void MainMenuScreen::init(SDL_Renderer* renderer) {
-    // Initialize resources and settings for the main menu screen
+MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& imgPath) : Screen(renderer, imgPath), imgPath(imgPath) {
+    SDL_Surface* bkgSurface = IMG_Load(imgPath.c_str());
+    if (!renderer) {
+        printf("can't use renderer");
+    }
+    bkgTexture = SDL_CreateTextureFromSurface(renderer, bkgSurface);
+    SDL_FreeSurface(bkgSurface);
+    if (!std::filesystem::exists(imgPath)) {
+        printf("can't find default image path");
+    }
 }
 
-void MainMenuScreen::update() {
-    // Update logic for the main menu screen
+
+void MainMenu::update() {
+    return;
 }
 
-void MainMenuScreen::render(SDL_Renderer* renderer) {
-    // Render the main menu screen
+void MainMenu::render(SDL_Renderer* renderer) {
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
+    SDL_RenderPresent(renderer);
 }
 
-void MainMenuScreen::handleInput(SDL_Event& event) {
-    // Handle user input for the main menu screen
+void MainMenu::handleInput(SDL_Event& event) {
+    return;
 }

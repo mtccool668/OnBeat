@@ -7,12 +7,18 @@
 #define WINDOW_HEIGHT = 1080;
 
 
-bool startGame(SDL_Window* window, SDL_Renderer* renderer);
+void startGame(SDL_Window* window, SDL_Renderer* renderer);
 
-bool endGame(SDL_Window* window, SDL_Renderer* renderer);
+void endGame(SDL_Window* window, SDL_Renderer* renderer);
 
+void loadButtons();
 
+SDL_Window* getWindow();
 
+SDL_Renderer* getRenderer();
 
+void discardAllEvents(bool quit);
+
+int countFolderContents(const std::string& folderPath);
 
 

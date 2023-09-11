@@ -1,20 +1,35 @@
 #include "button.h"
-#include "onbeat.h"
+#include "SDL2.h"
 
-Button::Button(SDL_Renderer* renderer, SDL_Texture* defaultTexture, SDL_Texture* hoverTexture, int x, int y, int w, int h) :
-	renderer(renderer), defaultTexture(defaultTexture), hoverTexture(hoverTexture), x(x), y(y), w(w), h(h) {
+
+
+Button::Button(SDL_Renderer* renderer, const std::string& defaultTexturePath, const std::string& hoverTexturePath, int x, int y, int w, int h) :
+	renderer(renderer), defaultTexturePath(defaultTexturePath), hoverTexturePath(hoverTexturePath), x(x), y(y), w(w), h(h) {
+
+	if (!std::filesystem::exists(defaultTexturePath)){
+		printf("can't find default texture path");
+	}
 	
-	hoverTexture = defaultTexture;
-
+	if (!std::filesystem::exists(hoverTexturePath)) {
+		printf("can't find hoverTexture path");
+	}
+	printf("i got here");
+	defaultButton = loadTexture(defaultTexturePath);
+	hoverButton = loadTexture(hoverTexturePath);
+	if (!defaultButton || !hoverButton) {
+		printf("Failed to load button textures.\n");
+	}
 }
 
+	
 Button::~Button() {
-	SDL_DestroyTexture(defaultTexture);
+	SDL_DestroyTexture(defaultButton);
+	SDL_DestroyTexture(hoverButton);
 }
 
 void Button::render() {
 	SDL_Rect dstRect = { x, y, w, h };
-	SDL_Texture* textureToRender = (isHovered) ? hoverTexture : defaultTexture;
+	SDL_Texture* textureToRender = (isHovered) ? hoverButton : defaultButton;
 	SDL_RenderCopy(renderer, textureToRender, nullptr, &dstRect);
 }
 
@@ -25,10 +40,10 @@ void Button::handleMouseHover(int mouseX, int mouseY) {
 	isHovered = (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h);
 }
 
-SDL_Texture* Button::loadTexture(const std::string& imagePath) {
-	SDL_Surface* surface = IMG_Load(imagePath.c_str());
+SDL_Texture* Button::loadTexture(const std::string& texturePath) {
+	SDL_Surface* surface = IMG_Load(texturePath.c_str());
 	if (!surface) {
-		throw std::runtime_error("Failed to load image: " + imagePath);
+		throw std::runtime_error("Failed to load image: " + texturePath);
 	}
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);

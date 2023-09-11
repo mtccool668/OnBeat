@@ -7,6 +7,9 @@
 #include <SDL_mixer.h>
 #include <stdlib.h>
 #include <time.h>
+#include <SDL_image.h>
+#include <filesystem>
+
 
 
 

@@ -108,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,13 +134,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="button.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="onbeat.cpp" />
     <ClCompile Include="metronome.cpp" />
+    <ClCompile Include="screen.cpp" />
+    <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
+    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="metronome.h" />
-    <ClInclude Include="onbeat.h" />
+    <ClInclude Include="ScreenManager.h" />
+    <ClInclude Include="SDL2.h" />
+    <ClInclude Include="screen.h" />
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

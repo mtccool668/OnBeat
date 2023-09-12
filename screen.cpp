@@ -25,3 +25,7 @@ void Screen::render(SDL_Renderer* renderer) {
 void handleInput(SDL_Event& event) {
 	return;
 }
+
+int Screen::get() {
+	return ID;
+}

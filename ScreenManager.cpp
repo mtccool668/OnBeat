@@ -37,3 +37,7 @@ void ScreenManager::handleInput(SDL_Event& event) {
 bool ScreenManager::isEmpty() const {
     return screenStack.empty();
 }
+
+int ScreenManager::getScreenID() {
+    return screenStack.top()->get();
+}

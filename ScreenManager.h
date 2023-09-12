@@ -1,7 +1,6 @@
 #pragma once
-#include <memory>
-#include <stack>
 #include "screen.h"
+
 class ScreenManager
 {
 public:
@@ -12,6 +11,7 @@ public:
     void renderScreen();
     void handleInput(SDL_Event& event);
     bool isEmpty() const;
+    int getScreenID();
 
 private:
     SDL_Renderer* renderer;

@@ -13,7 +13,7 @@ void startGame(SDL_Window* window, SDL_Renderer* renderer) {
 		printf("something went wrong: %s\n", SDL_GetError());
 	}
 	//Create Window
-	window = SDL_CreateWindow("OnBeat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("OnBeat", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	printf("lets get started\n");
 	if (window == nullptr) {
 		printf("something went wrong smh\n");
@@ -48,6 +48,7 @@ void endGame(SDL_Window* window, SDL_Renderer* renderer) {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
+
 
 void discardAllEvents(bool gameFlag) {
 	SDL_Event event;

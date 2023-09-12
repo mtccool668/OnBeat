@@ -11,7 +11,7 @@ public:
     void handleInput(SDL_Event& event) override;
     int get() override;
     
-    std::vector<SDL_Rect> loadButtons(const std::string imgPath, int width, int height);
+    void loadTextures(SDL_Renderer* renderer, const std::string imgPath, int width, int height);
 
 private:
     SDL_Renderer* renderer;

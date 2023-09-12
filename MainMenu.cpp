@@ -11,12 +11,15 @@ MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& imgPath) : Screen(
     if (!std::filesystem::exists(imgPath)) {
         printf("can't find default image path");
     }
-
+	
+	SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
+	
 	ID = 0;
 }
 
-std::vector<SDL_Rect> MainMenu::loadButtons(const std::string imgPath, int width, int height) {
-	SDL_Surface* spriteSurface = SDL_LoadBMP(imgPath.c_str());
+void MainMenu::loadTextures(SDL_Renderer* renderer, const std::string imgPath, int width, int height) {
+	std::cout << imgPath << "\n";
+	SDL_Surface* spriteSurface = IMG_Load(imgPath.c_str());
 	SDL_Texture* spriteTexture = nullptr;
 
 	if (spriteSurface) {
@@ -27,32 +30,46 @@ std::vector<SDL_Rect> MainMenu::loadButtons(const std::string imgPath, int width
 		printf("I cant seem to load the buttons");
 	}
 
+	/*
+	SDL_Rect srect0 = { 0, 0, 897, 326 };
+	SDL_Rect srect1 = { 897, 0, 897, 326 };
+	SDL_Rect srect2 = { 0, 326, 897, 326 };
+	SDL_Rect srect3 = { 897, 326, 897, 326 };
+	
+	SDL_Rect drect0 = { 0, 0, 897, 326 };
+	SDL_Rect drect1 = { 897, 0, 897, 326 };
+	SDL_Rect drect2 = { 0, 326, 897, 326 };
+	SDL_Rect drect3 = { 897, 326, 897, 326 };
+
+	SDL_RenderCopy(renderer, spriteTexture, &srect0, &drect0);
+	SDL_RenderCopy(renderer, spriteTexture, &srect1, &drect1);
+	SDL_RenderCopy(renderer, spriteTexture, &srect2, &drect2);
+	SDL_RenderCopy(renderer, spriteTexture, &srect3, &drect3);
+	
+	SDL_RenderPresent(renderer);
+	*/
+
 	//Create sprite rectangeles (depending on grid size)
 	const int imgCount = 4;
-	std::vector<SDL_Rect> spriteBoxes(imgCount, { 0, 0, 0, 0 });
-	int sWidth = width / (imgCount * (int)sqrt(imgCount));
-	int sHeight = height / imgCount;
+	const int gridSize = (int)sqrt(imgCount); //2x2, 4x4, 8x8, etc..
+	std::vector<SDL_Rect> spriteBoxes(imgCount);
+	int sWidth = width / gridSize;
+	int sHeight = height / gridSize;
 
 	for (int i = 0; i < imgCount; i++) {
-		spriteBoxes[i].x = (i % imgCount) * sWidth;
-		spriteBoxes[i].y = (i / imgCount) * sHeight;
-
-		if (i == 0) {
-			SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[i], &spriteBoxes[0]);
-		}
-		else if (i == 1) {
-			SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[0], &spriteBoxes[0]);
-		}
-		else if (i == 2) {
-			SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[0], &spriteBoxes[0]);
-		}
-		else if (i == 3) {
-			SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[0], &spriteBoxes[0]);
-		}
-
+		spriteBoxes[i].x = (i % gridSize) * sWidth;
+		spriteBoxes[i].y = (i / gridSize) * sHeight;
+		spriteBoxes[i].w = sWidth;
+		spriteBoxes[i].h = sHeight;
 	}
 
-	return spriteBoxes;
+	
+	SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[0], &spriteBoxes[0]);
+	SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[1], &spriteBoxes[1]);
+	SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[2], &spriteBoxes[2]);
+	SDL_RenderCopy(renderer, spriteTexture, &spriteBoxes[3], &spriteBoxes[3]);
+
+	SDL_RenderPresent(renderer);
 }
 
 void MainMenu::update() {
@@ -87,8 +104,6 @@ void MainMenu::update() {
 }
 
 void MainMenu::render(SDL_Renderer* renderer) {
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
     SDL_RenderPresent(renderer);
 }
 

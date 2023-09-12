@@ -33,11 +33,21 @@ int main(int argc, char* argv[]) {
 	exit.render();
 	*/
 
+	//Screen Manager
 	ScreenManager screenManager(renderer);
-	std::shared_ptr<Screen> loadingScreen = std::make_shared<MainMenu>(renderer, "images/menu.jpg");
-	screenManager.pushScreen(loadingScreen);
+	
+	//Main Menu Screen
+	std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/menu.jpg");
+	std::shared_ptr<MainMenu> mainMenu = std::dynamic_pointer_cast<MainMenu>(baseMainMenu);
+	
+	
+	mainMenu->loadTextures(renderer, "images/menu_sheet.png", 1794, 652);
+	screenManager.pushScreen(mainMenu);
 
 
+	//Level Screen
+	//std::shared_ptr<Screen> levelMenu = std::make_shared<GameLevel>(renderer, "images/menu.jpg");
+		
 
 	/*gpress = Mix_LoadWAV("sounds/niga.wav");
 	Metronome m1(60);
@@ -50,11 +60,12 @@ int main(int argc, char* argv[]) {
 	bool quit = false;
 	printf("i got here\n");
 
+	int screenID = screenManager.getScreenID();
 	while (!quit) {
-		static int screenID = screenManager.getScreenID();
 		switch (screenID) {
 		case MAIN_MENU:
 			screenManager.updateScreen();
+			screenManager.renderScreen();
 		}
 
 	}

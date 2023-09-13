@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="button.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="graphics.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="onbeat.cpp" />
     <ClCompile Include="metronome.cpp" />
@@ -145,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="button.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="graphics.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="metronome.h" />
     <ClInclude Include="ScreenManager.h" />

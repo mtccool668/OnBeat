@@ -7,11 +7,6 @@
 #include "VideoPlayer.h"
 #include "GameLogic.h"
 
-//Key press surfaces constants
-
-const int TARGET_FPS = 240;
-const int FRAME_TIME = 1000 / TARGET_FPS;
-
 enum screen { MAIN_MENU, GAME_SETTINGS, GAME };
 
 
@@ -23,7 +18,7 @@ int main(int argc, char* argv[]) {
 	window = getWindow();
 	renderer = getRenderer();
 	printf("finished creating game\n");
-
+	
 	/*Create button and load textures
 	(TEST 1)
 	Button button(renderer, "images/left.bmp", "images/down.bmp", 100, 100, 200, 100);
@@ -33,11 +28,18 @@ int main(int argc, char* argv[]) {
 	exit.render();
 	*/
 
+	//Load background music
+	Mix_Music* bkgMusic = Mix_LoadMUS("music/bkg_music.mp3");
+	if (!bkgMusic) {
+		printf("music error\n");
+	}
+	
+		
 	//Screen Manager
 	ScreenManager screenManager(renderer);
 	
 	//Main Menu Screen
-	std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/home_bkg.png");
+	std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/home_bkg.png", "images/title.png");
 	std::shared_ptr<MainMenu> mainMenu = std::dynamic_pointer_cast<MainMenu>(baseMainMenu);
 	
 	
@@ -58,14 +60,14 @@ int main(int argc, char* argv[]) {
 
 
 	bool quit = false;
-	printf("i got here\n");
-
+	
 	int screenID = screenManager.getScreenID();
 	while (!quit) {
 		switch (screenID) {
 		case MAIN_MENU:
 			screenManager.updateScreen();
 			screenManager.renderScreen();
+
 		}
 
 	}

@@ -1,17 +1,26 @@
 #include "MainMenu.h"
 
 
-MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& bkgPath) : Screen(renderer, bkgPath), renderer(renderer), bkgPath(bkgPath), sheet(nullptr) {
-    SDL_Surface* bkgSurface = IMG_Load(bkgPath.c_str());
+
+MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& bkgPath, const std::string& titlePath) : 
+	Screen(renderer, bkgPath), renderer(renderer), bkgPath(bkgPath), titlePath(titlePath), sheet(nullptr) {
+    
+	SDL_Surface* bkgSurface = IMG_Load(bkgPath.c_str());
+	SDL_Surface* titleSurface = IMG_Load(titlePath.c_str());
     if (!renderer) {
         printf("can't use renderer");
     }
+
+	if (!std::filesystem::exists(bkgPath) || !std::filesystem::exists(titlePath)) {
+		printf("can't find default image path");
+	}
+
     bkgTexture = SDL_CreateTextureFromSurface(renderer, bkgSurface);
+	titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
     SDL_FreeSurface(bkgSurface);
-    if (!std::filesystem::exists(bkgPath)) {
-        printf("can't find default image path");
-    }
-	
+	SDL_FreeSurface(titleSurface);
+
+  
 	ID = 0;
 	buttonState = NORMAL;
 	buttonName = UNDEFINED;
@@ -22,6 +31,12 @@ MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& bkgPath) : Screen(
 		drects[i].w = 0;
 		drects[i].h = 0;
 	}
+
+	Mix_Music* bkgMusic = Mix_LoadMUS("music/bkg_music.mp3");
+	if (Mix_PlayMusic(bkgMusic, -1) == -1) {
+		printf("music playback error: %s\n", Mix_GetError());
+	}
+
 
 }
 
@@ -53,10 +68,10 @@ void MainMenu::loadTextures(SDL_Renderer* renderer, const std::string imgPath, i
 		spriteRects[i].h = sHeight;
 	}
 	
-	drects[0] = { 0, 0, spriteRects[0].w, spriteRects[0].h };
-	drects[1] = { 0, 0, spriteRects[1].w, spriteRects[1].h };
-	drects[2] = { 500, 0, spriteRects[2].w, spriteRects[2].h };
-	drects[3] = { 500, 0, spriteRects[2].w, spriteRects[2].h };
+	drects[0] = { (WINDOW_WIDTH - sWidth) / 2, 540, spriteRects[0].w, spriteRects[0].h };
+	drects[1] = { (WINDOW_WIDTH - sWidth) / 2, 540, spriteRects[1].w, spriteRects[1].h };
+	drects[2] = { (WINDOW_WIDTH- sWidth) / 2, 810, spriteRects[2].w, spriteRects[2].h };
+	drects[3] = { (WINDOW_WIDTH - sWidth) / 2, 810, spriteRects[2].w, spriteRects[2].h };
 
 	
 	srects = spriteRects;
@@ -116,6 +131,12 @@ void MainMenu::update() {
 				if (!hovered) {
 					buttonState = NORMAL;
 				}
+				if (buttonName == EXIT) {
+					SDL_Delay(1000);
+					SDL_QuitSubSystem(SDL_INIT_VIDEO);
+					SDL_QuitSubSystem(SDL_INIT_AUDIO);
+					SDL_Quit();
+				}
 				break;
 			}
 		
@@ -146,9 +167,9 @@ ButtonName MainMenu::getButton(int mouseX, int mouseY) {
 void MainMenu::render(SDL_Renderer* renderer) {
 	
 	SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
-	
+	SDL_Rect titleRect = { WINDOW_WIDTH - 1500, 0, 1500, 500 };
+	SDL_RenderCopy(renderer, titleTexture, nullptr, &titleRect);
 
-	printf("%d\n", buttonState);
 
 	switch (buttonState) {
 	case NORMAL:
@@ -163,7 +184,7 @@ void MainMenu::render(SDL_Renderer* renderer) {
 		switch (buttonName) {
 		case PLAY:
 			SDL_RenderCopy(renderer, sheet, &srects[1], &drects[1]); // Render Play button
-			SDL_RenderCopy(renderer, sheet, &srects[2], &drects[2]);
+			SDL_RenderCopy(renderer, sheet, &srects[2], &drects[2]); 
 			break;
 		case EXIT:
 			SDL_RenderCopy(renderer, sheet, &srects[3], &drects[3]); // Render Exit button

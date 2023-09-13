@@ -12,7 +12,7 @@
 const int TARGET_FPS = 240;
 const int FRAME_TIME = 1000 / TARGET_FPS;
 
-enum screen { MAIN_MENU, SETTINGS, GAME };
+enum screen { MAIN_MENU, GAME_SETTINGS, GAME };
 
 
 int main(int argc, char* argv[]) {
@@ -37,14 +37,14 @@ int main(int argc, char* argv[]) {
 	ScreenManager screenManager(renderer);
 	
 	//Main Menu Screen
-	std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/menu.jpg");
+	std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/home_bkg.png");
 	std::shared_ptr<MainMenu> mainMenu = std::dynamic_pointer_cast<MainMenu>(baseMainMenu);
 	
 	
-	mainMenu->loadTextures(renderer, "images/menu_sheet.png", 1794, 652);
+	mainMenu->loadTextures(renderer, "images/menu_sheet.png", 830, 294);
 	screenManager.pushScreen(mainMenu);
 
-
+	
 	//Level Screen
 	//std::shared_ptr<Screen> levelMenu = std::make_shared<GameLevel>(renderer, "images/menu.jpg");
 		

@@ -1,21 +1,29 @@
 #pragma once
 #include "screen.h"
+#include "button.h"
 
 
 class MainMenu : public Screen {
 
 public:
-    MainMenu(SDL_Renderer* renderer, const std::string& imgPath);
+    MainMenu(SDL_Renderer* renderer, const std::string& bkgPath);
     void update() override;
+    ButtonName getButton(int mouseX, int mouseY);
     void render(SDL_Renderer* renderer) override;
-    void handleInput(SDL_Event& event) override;
     int get() override;
     
     void loadTextures(SDL_Renderer* renderer, const std::string imgPath, int width, int height);
 
 private:
     SDL_Renderer* renderer;
-    const std::string& imgPath;
+    const std::string& bkgPath;
     SDL_Texture* bkgTexture;
+    SDL_Texture* sheet;
     int ID;
+
+    std::vector<SDL_Rect> srects;
+    SDL_Rect drects[4];
+    ButtonState buttonState;
+    ButtonName buttonName;
+    
 };

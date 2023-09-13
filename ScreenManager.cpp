@@ -28,12 +28,6 @@ void ScreenManager::renderScreen() {
     }
 }
 
-void ScreenManager::handleInput(SDL_Event& event) {
-    if (!screenStack.empty()) {
-        screenStack.top()->handleInput(event);
-    }
-}
-
 bool ScreenManager::isEmpty() const {
     return screenStack.empty();
 }

@@ -12,6 +12,7 @@ Screen::Screen(SDL_Renderer* renderer,const std::string& imgPath) : renderer(ren
 		std::cout << "can't create bkg texture" << "\n";
 	}
 
+	ID = -1;
 }
 
 void Screen::update() {
@@ -21,9 +22,6 @@ void Screen::render(SDL_Renderer* renderer) {
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
 	SDL_RenderPresent(renderer);
-}
-void handleInput(SDL_Event& event) {
-	return;
 }
 
 int Screen::get() {

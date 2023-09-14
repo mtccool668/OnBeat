@@ -1,8 +1,4 @@
 #include "VideoPlayer.h"
-#include "SDL2.h"
-#include <vector>
-#include <filesystem>
-#include "GameLogic.h"
 
 VideoPlayer::VideoPlayer(SDL_Renderer* renderer, const std::string& folderPath) : renderer(renderer), folderPath(folderPath){
 	if (!renderer) {

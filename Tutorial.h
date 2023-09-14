@@ -1,8 +1,8 @@
 #pragma once
 #include "button.h"
 #include "graphics.h"
-#include "gamelogic.h"
-
+#include "ContentHandler.h"
+#include "textures.h"
 
 enum LEVEL {
 	BEGINNER,
@@ -14,32 +14,17 @@ enum LEVEL {
 class Tutorial
 {
 public:
-	Tutorial(SDL_Renderer* renderer, const std::string& bkgPath, const std::string& titlePath);
+	Tutorial(SDL_Renderer* renderer);
 	void update();
 	ButtonName getButton(int mouseX, int mouseY);
-	void loadTextures(SDL_Renderer* renderer, const std::string imgPath, int width, int height);
 	void render(SDL_Renderer* renderer);
-	screen get();
+	screen getScreen();
 	void reset();
 	
 private:
 	SDL_Renderer* renderer;
-	const std::string& bkgPath;
-	const std::string& titlePath;
-	SDL_Texture* bkgTexture;
-	SDL_Texture* titleTexture;
-	SDL_Texture* sheet;
-
 	ButtonState buttonState;
 	ButtonName buttonName;
-
-
-
-
-
-
-
-private:
 	LEVEL level;
 };
 

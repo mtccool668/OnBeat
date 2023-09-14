@@ -1,5 +1,7 @@
 #pragma once
 #include "SDL2.h"
+#include "tools.h"
+
 class VideoPlayer
 {
 public:

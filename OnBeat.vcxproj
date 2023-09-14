@@ -142,22 +142,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="button.cpp" />
-    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="ContentHandler.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="onbeat.cpp" />
     <ClCompile Include="metronome.cpp" />
+    <ClCompile Include="textures.cpp" />
+    <ClCompile Include="tools.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
-    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="ContentHandler.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="metronome.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDL2.h" />
+    <ClInclude Include="textures.h" />
+    <ClInclude Include="tools.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>

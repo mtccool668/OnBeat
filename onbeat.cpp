@@ -1,48 +1,56 @@
-#define _CRTDBG_MAP_ALLOC
 #include "SDL2.h"
 #include "metronome.h"
 #include "button.h"
 #include "MainMenu.h"
 #include "VideoPlayer.h"
-#include "GameLogic.h"
+#include "ContentHandler.h"
 #include "Tutorial.h"
-#include <crtdbg.h>
 
 
+bool init() {
+	//Start SDL2
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+		printf("something went wrong: %s\n", SDL_GetError());
+	}
+	if (!(IMG_Init(IMG_INIT_PNG))) {
+		printf("IMG_init has failed\n");
+	}
+	//Open SDL_Mixer (audio program)
+	if (Mix_OpenAudio(48000, MIX_DEFAULT_FORMAT, 2, 64) < 0) {
+		printf("SDL_mixer bad: %s\n", Mix_GetError());
+	}
+
+	return true;
+
+}
 
 int main(int argc, char* argv[]) {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	SDL_Window* window = nullptr;
-	SDL_Renderer* renderer = nullptr;
-	startGame(window, renderer);
-	window = getWindow();
-	renderer = getRenderer();
+	if (!init()) {
+		printf("can't start game uh oh\n");
+		return -1;
+	}
+
+	ContentHandler contentLoader("Onbeat", SCREEN_WIDTH, SCREEN_HEIGHT);
+	contentLoader.createGameTextures();
+	SDL_Window* window = contentLoader.getWindow();
+	SDL_Renderer* renderer = contentLoader.getRenderer();
+	
 	printf("finished creating game\n");
 	SDL_SetWindowInputFocus(window);
 	
-	/*Create button and load textures
-	(TEST 1)
-	Button button(renderer, "images/left.bmp", "images/down.bmp", 100, 100, 200, 100);
-	button.render();
-
-	Button exit(renderer, "images/right.bmp", "images/up.bmp", 900, 900, 200, 100);
-	exit.render();
-	*/
-
 	//Load background music
 	Mix_Music* bkgMusic = Mix_LoadMUS("music/bkg_music.mp3");
-	if (!bkgMusic) {
-		printf("music error\n");
+	if (Mix_PlayMusic(bkgMusic, -1) == -1) {
+		printf("music playback error: %s\n", Mix_GetError());
 	}
-	
-	
+
 	//Main Menu Screen
-	MainMenu mainMenu(renderer, "images/home_bkg.png", "images/title.png");
-	mainMenu.loadTextures(renderer, "images/menu_sheet.png", 830, 294);
+	MainMenu mainMenu(renderer);
+	mainMenu.render(renderer);
 
 	//Tutorial Screen
-	Tutorial tutorial(renderer, "images/home_bkg.png", "images/title.png");
-	tutorial.loadTextures(renderer, "images/tutorial1.png", 1519, 309);
+	Tutorial tutorial(renderer);
+	tutorial.render(renderer);
 	//Level Screen
 	
 
@@ -51,28 +59,28 @@ int main(int argc, char* argv[]) {
 
 	screen screenID = MAIN_MENU;
 	while (!quit) {
-		
-		if (screenID == MAIN_MENU) {
+		switch (screenID) {
+		case MAIN_MENU:
 			tutorial.reset();
 			mainMenu.update();
 			mainMenu.render(renderer);
-			screenID = mainMenu.get();
-		}
+			screenID = mainMenu.getScreen();
+			break;
 
-		else if (screenID == TUTORIAL) {
+		case TUTORIAL:
 			mainMenu.reset();
 			tutorial.update();
 			tutorial.render(renderer);
-			screenID = tutorial.get();
+			screenID = tutorial.getScreen();
+			break;
 		}
 
-		
 		SDL_RenderPresent(renderer);
 	}
-
+	SDL_QuitSubSystem(SDL_INIT_VIDEO && SDL_INIT_AUDIO);
+	IMG_Quit();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-	_CrtDumpMemoryLeaks();
 	SDL_Quit();
 	return 1;
 

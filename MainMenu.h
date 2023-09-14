@@ -1,16 +1,15 @@
 #pragma once
-#include "screen.h"
 #include "button.h"
 #include "graphics.h"
 #include "gamelogic.h"
 
-class MainMenu : public Screen {
+class MainMenu {
 
 public:
     MainMenu(SDL_Renderer* renderer, const std::string& bkgPath, const std::string& titlePath);
-    void update() override;
+    void update();
     ButtonName getButton(int mouseX, int mouseY);
-    void render(SDL_Renderer* renderer) override;
+    void render(SDL_Renderer* renderer);
     screen get();
     void reset();
 

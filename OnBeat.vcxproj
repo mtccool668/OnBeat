@@ -73,8 +73,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\mtcco\vclib\SDL2-2.28.1\include;C:\Users\mtcco\vclib\SDL2_mixer-2.6.3\include;C:\Users\mtcco\vclib\\SDL2_image-2.6.3\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\mtcco\vclib\SDL2-2.28.1\lib\x64;C:\Users\mtcco\vclib\SDL2_mixer-2.6.3\lib\x64;C:\Users\mtcco\vclib\SDL2_image-2.6.3\lib\x64;$(LibraryPath)</LibraryPath>
-    <OutDir>C:\Users\mtcco\source\repos\OnBeat\x64\Release</OutDir>
-    <IntDir>$(Platform)\Debug</IntDir>
+    <OutDir>C:\Users\mtcco\source\repos\OnBeat\x64\Release\</OutDir>
+    <IntDir>$(Platform)\Debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Users\mtcco\vclib\SDL2-2.28.1\include;C:\Users\mtcco\vclib\SDL2_mixer-2.6.3\include;C:\Users\mtcco\vclib\\SDL2_image-2.6.3\include;$(IncludePath)</IncludePath>
@@ -147,8 +147,6 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="onbeat.cpp" />
     <ClCompile Include="metronome.cpp" />
-    <ClCompile Include="screen.cpp" />
-    <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
@@ -159,9 +157,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="metronome.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="SDL2.h" />
-    <ClInclude Include="screen.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>

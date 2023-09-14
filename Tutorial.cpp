@@ -1,6 +1,6 @@
 #include "Tutorial.h"
 
-Tutorial::Tutorial(SDL_Renderer* renderer, const std::string& bkgPath, const std::string& titlePath) : Screen(renderer, bkgPath), renderer(renderer),
+Tutorial::Tutorial(SDL_Renderer* renderer, const std::string& bkgPath, const std::string& titlePath) : renderer(renderer),
 bkgPath(bkgPath), titlePath(titlePath) {
 	SDL_Surface* bkgSurface = IMG_Load(bkgPath.c_str());
 	SDL_Surface* titleSurface = IMG_Load(titlePath.c_str());
@@ -19,6 +19,27 @@ bkgPath(bkgPath), titlePath(titlePath) {
 	buttonState = NORMAL;
 	level = BEGINNER;
 	buttonName = NONE;
+
+	sheet = nullptr;
+
+}
+
+void Tutorial::loadTextures(SDL_Renderer* renderer, const std::string imgPath, int width, int height) {
+	std::cout << imgPath << "\n";
+	SDL_Surface* spriteSurface = IMG_Load(imgPath.c_str());
+	SDL_Texture* spriteTexture = nullptr;
+
+	if (spriteSurface) {
+		spriteTexture = SDL_CreateTextureFromSurface(renderer, spriteSurface);
+		SDL_FreeSurface(spriteSurface);
+	}
+	else {
+		printf("I cant seem to load the textures");
+	}
+
+	sheet = spriteTexture;
+
+
 }
 
 
@@ -58,9 +79,21 @@ void Tutorial::update() {
 
 void Tutorial::render(SDL_Renderer* renderer) {
 	SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
+	SDL_DestroyTexture(bkgTexture);
+	
+	SDL_Texture* girlTexture = SDL_CreateTextureFromSurface(renderer, IMG_Load("images/charMC.png"));
+	SDL_Rect girlRect = { 0, 300, 1011, 1145 };
+	SDL_RenderCopy(renderer, girlTexture, nullptr, &girlRect);
+	SDL_DestroyTexture(girlTexture);
+	
 	SDL_Rect titleRect = { (WINDOW_WIDTH - 950) / 2, 50, 950, 310 };
 	SDL_RenderCopy(renderer, titleTexture, nullptr, &titleRect);
-	SDL_RenderPresent(renderer);
+	SDL_DestroyTexture(titleTexture);
+	
+	SDL_Rect quarterRect = { (WINDOW_WIDTH - 1519) / 2, 500, 1519, 309 };
+	SDL_RenderCopy(renderer, sheet, nullptr, &quarterRect);
+	SDL_DestroyTexture(sheet);
+	
 }
 
 screen Tutorial::get() {

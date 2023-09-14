@@ -3,7 +3,7 @@
 
 
 MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& bkgPath, const std::string& titlePath) : 
-	Screen(renderer, bkgPath), renderer(renderer), bkgPath(bkgPath), titlePath(titlePath), sheet(nullptr) {
+	 renderer(renderer), bkgPath(bkgPath), titlePath(titlePath), sheet(nullptr) {
     
 	SDL_Surface* bkgSurface = IMG_Load(bkgPath.c_str());
 	SDL_Surface* titleSurface = IMG_Load(titlePath.c_str());
@@ -48,7 +48,7 @@ void MainMenu::loadTextures(SDL_Renderer* renderer, const std::string imgPath, i
 		SDL_FreeSurface(spriteSurface);
 	}
 	else {
-		printf("I cant seem to load the buttons");
+		printf("I cant seem to load the textures");
 	}
 
 	//Create sprite rectangeles (depending on grid size)
@@ -210,7 +210,6 @@ void MainMenu::render(SDL_Renderer* renderer) {
 
 	}
 	
-	SDL_RenderPresent(renderer);
 }	
 
 screen MainMenu::get() {

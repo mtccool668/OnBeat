@@ -6,8 +6,8 @@
 #include "MainMenu.h"
 #include "VideoPlayer.h"
 #include "GameLogic.h"
+#include "Tutorial.h"
 
-enum screen { MAIN_MENU, GAME_SETTINGS, GAME };
 
 
 int main(int argc, char* argv[]) {
@@ -18,6 +18,7 @@ int main(int argc, char* argv[]) {
 	window = getWindow();
 	renderer = getRenderer();
 	printf("finished creating game\n");
+	SDL_SetWindowInputFocus(window);
 	
 	/*Create button and load textures
 	(TEST 1)
@@ -36,16 +37,21 @@ int main(int argc, char* argv[]) {
 	
 		
 	//Screen Manager
-	ScreenManager screenManager(renderer);
+	//ScreenManager screenManager(renderer);
 	
 	//Main Menu Screen
-	std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/home_bkg.png", "images/title.png");
-	std::shared_ptr<MainMenu> mainMenu = std::dynamic_pointer_cast<MainMenu>(baseMainMenu);
+	//std::shared_ptr<Screen> baseMainMenu = std::make_shared<MainMenu>(renderer, "images/home_bkg.png", "images/title.png");
+	//std::shared_ptr<MainMenu> mainMenu = std::dynamic_pointer_cast<MainMenu>(baseMainMenu);
+	MainMenu mainMenu(renderer, "images/home_bkg.png", "images/title.png");
+	mainMenu.loadTextures(renderer, "images/menu_sheet.png", 830, 294);
+	printf("loaded textures");
 	
-	
-	mainMenu->loadTextures(renderer, "images/menu_sheet.png", 830, 294);
-	screenManager.pushScreen(mainMenu);
+	//Tutorial Screen
+	//std::shared_ptr<Screen> baseTutorial = std::make_shared<Tutorial>(renderer, "images/home_bkg.png", "images/title.png");
+	//std::shared_ptr<Tutorial> mainTutorial = std::dynamic_pointer_cast<Tutorial>(baseTutorial);
+	Tutorial tutorial(renderer, "images/charMC.png", "images/title.png");
 
+	
 	
 	//Level Screen
 	//std::shared_ptr<Screen> levelMenu = std::make_shared<GameLevel>(renderer, "images/menu.jpg");
@@ -60,21 +66,29 @@ int main(int argc, char* argv[]) {
 
 
 	bool quit = false;
-	
-	int screenID = screenManager.getScreenID();
-	while (!quit) {
-		switch (screenID) {
-		case MAIN_MENU:
-			screenManager.updateScreen();
-			screenManager.renderScreen();
 
+	screen screenID = MAIN_MENU;
+	while (!quit) {
+		printf("%d\n", screenID);
+		if (screenID == MAIN_MENU) {
+			tutorial.reset();
+			mainMenu.update();
+			mainMenu.render(renderer);
+			screenID = mainMenu.get();
 		}
 
+		if (screenID == TUTORIAL) {
+			mainMenu.reset();
+			tutorial.update();
+			tutorial.render(renderer);
+			screenID = tutorial.get();
+		}
 	}
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+	printf("ended game");
 	return 1;
 
 }

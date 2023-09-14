@@ -20,10 +20,8 @@ MainMenu::MainMenu(SDL_Renderer* renderer, const std::string& bkgPath, const std
     SDL_FreeSurface(bkgSurface);
 	SDL_FreeSurface(titleSurface);
 
-  
-	ID = 0;
 	buttonState = NORMAL;
-	buttonName = UNDEFINED;
+	buttonName = NONE;
 
 	for (int i = 0; i < 4; ++i) {
 		drects[i].x = 0;
@@ -84,6 +82,7 @@ void MainMenu::update() {
 	bool hovered = false;
 	int mouseX, mouseY;
 	bool mouseHover = false;
+	bool pressed = false;
 
 	while (SDL_PollEvent(&event))
 	{
@@ -109,7 +108,7 @@ void MainMenu::update() {
 			if (!hovered) {
 				buttonState = NORMAL;
 			}
-			
+
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:
@@ -127,9 +126,12 @@ void MainMenu::update() {
 						break;
 					}
 				}
-				
+
 				if (!hovered) {
 					buttonState = NORMAL;
+				}
+				if (buttonState == PRESS) {
+					printf("i got here\n");
 				}
 				if (buttonName == EXIT) {
 					SDL_Delay(1000);
@@ -139,14 +141,12 @@ void MainMenu::update() {
 				}
 				break;
 			}
-		
-				
+
+
 			break;
 		}
 
 	}
-	SDL_RenderClear(renderer);
-	render(renderer);
 }
 
 ButtonName MainMenu::getButton(int mouseX, int mouseY) {
@@ -160,14 +160,13 @@ ButtonName MainMenu::getButton(int mouseX, int mouseY) {
 		return EXIT;
 	}
 	
-	return UNDEFINED;
+	return NONE;
 
 }
 
 void MainMenu::render(SDL_Renderer* renderer) {
-	
 	SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
-	SDL_Rect titleRect = { WINDOW_WIDTH - 1500, 0, 1500, 500 };
+	SDL_Rect titleRect = { (WINDOW_WIDTH - 950) / 2, 50, 950, 310 };
 	SDL_RenderCopy(renderer, titleTexture, nullptr, &titleRect);
 
 
@@ -211,10 +210,18 @@ void MainMenu::render(SDL_Renderer* renderer) {
 
 	}
 	
-	
 	SDL_RenderPresent(renderer);
 }	
 
-int MainMenu::get() {
-	return ID;
+screen MainMenu::get() {
+	if (buttonState == PRESS && buttonName == PLAY) {
+		return TUTORIAL;
+	}
+	return MAIN_MENU;
+}
+
+void MainMenu::reset() {
+	SDL_RenderClear(renderer);
+	buttonState = NORMAL;
+	
 }

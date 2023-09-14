@@ -17,7 +17,7 @@ public:
 	
 
 	void sendMsg();
-	int trackBPM();
+	float trackBPM();
 	void playMetronome(int n, Mix_Chunk* c);
 	
 	

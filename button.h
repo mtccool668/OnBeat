@@ -10,7 +10,7 @@ enum ButtonState {
 };
 
 enum ButtonName {
-	UNDEFINED,
+	NONE,
 	PLAY,
 	EXIT,
 	SETTINGS,

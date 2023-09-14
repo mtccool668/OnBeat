@@ -40,7 +40,7 @@ void VideoPlayer::playVideo(SDL_Renderer* renderer, const std::string& folderPat
 	printf("I got to %d frames\n", frameCount);
 
 	//Playing video
-	int frameTime = 1000 / targetFrameRate;
+	Uint32 frameTime = 1000 / targetFrameRate;
 
 	for (int i = 0; i < frameCount; i++) {
 		discardAllEvents(playingVideo);

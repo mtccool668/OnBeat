@@ -2,6 +2,7 @@
 #include "SDL2.h"
 
 
+
 struct {
 	SDL_Window* window;
 	SDL_Renderer* renderer;
@@ -33,6 +34,7 @@ void startGame(SDL_Window* window, SDL_Renderer* renderer) {
 
 	GameSystems.window = window;
 	GameSystems.renderer = renderer;
+
 }
 
 SDL_Renderer* getRenderer() {

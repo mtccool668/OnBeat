@@ -4,7 +4,6 @@
 #include "graphics.h"
 #include "gamelogic.h"
 
-
 class MainMenu : public Screen {
 
 public:
@@ -12,7 +11,9 @@ public:
     void update() override;
     ButtonName getButton(int mouseX, int mouseY);
     void render(SDL_Renderer* renderer) override;
-    int get() override;
+    screen get();
+    void reset();
+
     
     void loadTextures(SDL_Renderer* renderer, const std::string imgPath, int width, int height);
 
@@ -23,7 +24,6 @@ private:
     SDL_Texture* bkgTexture;
     SDL_Texture* titleTexture;
     SDL_Texture* sheet;
-    int ID;
 
     std::vector<SDL_Rect> srects;
     SDL_Rect drects[4];

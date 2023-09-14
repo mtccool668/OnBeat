@@ -32,6 +32,3 @@ bool ScreenManager::isEmpty() const {
     return screenStack.empty();
 }
 
-int ScreenManager::getScreenID() {
-    return screenStack.top()->get();
-}

@@ -23,7 +23,3 @@ void Screen::render(SDL_Renderer* renderer) {
 	SDL_RenderCopy(renderer, bkgTexture, nullptr, nullptr);
 	SDL_RenderPresent(renderer);
 }
-
-int Screen::get() {
-	return ID;
-}

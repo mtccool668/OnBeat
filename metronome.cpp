@@ -20,7 +20,7 @@ float calculateBPM(int clickCount, float totalClickInterval) {
 	return 60000.0f / averageClickInterval;
 }
 
-int Metronome::trackBPM() {
+float Metronome::trackBPM() {
 	float BPM = 0.0;
 	int clickCount = 0;
 	Uint32 lastClickTime = 0;
@@ -69,7 +69,7 @@ int Metronome::trackBPM() {
 		}
 
 	}
-	return BPM;
+	return float(BPM);
 }
 
 void Metronome::playMetronome(int BPM, Mix_Chunk* tickSound) {

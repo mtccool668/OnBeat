@@ -11,7 +11,6 @@ public:
     void renderScreen();
     void handleInput(SDL_Event& event);
     bool isEmpty() const;
-    int getScreenID();
 
 private:
     SDL_Renderer* renderer;

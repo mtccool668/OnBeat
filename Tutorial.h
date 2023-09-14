@@ -26,5 +26,7 @@ private:
 	ButtonState buttonState;
 	ButtonName buttonName;
 	LEVEL level;
+	int clicks;
+	bool repeat;
 };
 

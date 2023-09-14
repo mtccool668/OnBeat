@@ -34,6 +34,7 @@ void ContentHandler::createGameTextures() {
 	SDL_Texture* girlTexture = loadTexture("images/charMC.png");
 	SDL_Texture* titleTexture = loadTexture("images/title.png");
 	SDL_Texture* menuSheet = loadTexture("images/menu_sheet.png");
+	SDL_Texture* tutorial1_base = loadTexture("images/tutorial1_base.png");
 	SDL_Texture* tutorial1 = loadTexture("images/tutorial1.png");
 
 	//Background Textures
@@ -49,8 +50,8 @@ void ContentHandler::createGameTextures() {
 	buttonTextures[0] = menuSheet;
 	
 	//Entity Textures
-	entityTextures[0] = tutorial1;
-	
+	entityTextures[0] = tutorial1_base;
+	entityTextures[1] = tutorial1;
 }
 
 SDL_Renderer* ContentHandler::getRenderer() const{

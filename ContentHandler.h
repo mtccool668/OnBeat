@@ -3,8 +3,7 @@
 #include "graphics.h"
 #include "MainMenu.h"
 #include "button.h"
-#include "textures.h"
-
+#include "assets.h"
 
 class ContentHandler {
 public:

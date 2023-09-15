@@ -1,8 +1,7 @@
 #pragma once
-#include "button.h"
 #include "graphics.h"
 #include "ContentHandler.h"
-#include "textures.h"
+#include "assets.h"
 
 class MainMenu {
 

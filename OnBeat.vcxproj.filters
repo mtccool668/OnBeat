@@ -39,7 +39,10 @@
     <ClCompile Include="tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="textures.cpp">
+    <ClCompile Include="assets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreTracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,16 +65,16 @@
     <ClInclude Include="graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tutorial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="textures.h">
+    <ClInclude Include="assets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreTracker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -141,25 +141,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ScoreTracker.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="ContentHandler.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="onbeat.cpp" />
     <ClCompile Include="metronome.cpp" />
-    <ClCompile Include="textures.cpp" />
+    <ClCompile Include="assets.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ScoreTracker.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="ContentHandler.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="metronome.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="SDL2.h" />
-    <ClInclude Include="textures.h" />
+    <ClInclude Include="assets.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="Tutorial.h" />
   </ItemGroup>

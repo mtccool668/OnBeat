@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "ContentHandler.h"
 #include "Tutorial.h"
+#include "assets.h"
 
 
 bool init() {
@@ -78,6 +79,7 @@ int main(int argc, char* argv[]) {
 	}
 	SDL_QuitSubSystem(SDL_INIT_VIDEO && SDL_INIT_AUDIO);
 	IMG_Quit();
+	contentHandler.destroyGameTextures();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

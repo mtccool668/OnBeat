@@ -1,5 +1,5 @@
 #include "SDL2.h"
-#include "textures.h"
+#include "assets.h"
 
 //Textures
 extern SDL_Texture* entityTextures[4] = { nullptr };

@@ -1,8 +1,22 @@
 #pragma once
 #include "SDL2.h"
-#include "ContentHandler.h"
 
 
+enum ButtonState {
+	NORMAL,
+	HOVER,
+	PRESS
+};
+
+enum ButtonName {
+	NONE,
+	PLAY,
+	EXIT,
+	SETTINGS,
+	SHOP,
+	PROFILE,
+	PHONE
+};
 
 //Textures
 extern SDL_Texture* entityTextures[4];

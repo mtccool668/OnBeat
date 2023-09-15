@@ -150,7 +150,6 @@
     <ClCompile Include="textures.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="Tutorial.cpp" />
-    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
@@ -163,7 +162,6 @@
     <ClInclude Include="textures.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="Tutorial.h" />
-    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

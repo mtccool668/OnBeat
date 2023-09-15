@@ -2,7 +2,6 @@
 #include "metronome.h"
 #include "button.h"
 #include "MainMenu.h"
-#include "VideoPlayer.h"
 #include "ContentHandler.h"
 #include "Tutorial.h"
 

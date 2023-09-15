@@ -61,21 +61,38 @@ void Tutorial::update() {
 	}
 }
 
-void Tutorial::render300(SDL_Renderer* renderer) {
+void Tutorial::render300() {
 
 	int frameWidth = 1435 / 5;
 	int frameHeight = 1224 / 3;
 
-	SDL_Rect drect = { (SCREEN_WIDTH - frameWidth) / 2, 200, frameWidth, frameHeight };
-	for (int col = 0; col < 5; ++col) {
-		SDL_Rect srect = { col * frameWidth, 0, frameWidth, frameHeight };
-		SDL_RenderCopy(renderer, characterTextures[0], &srect, &drect);
+	for (int col = 0; col < 4; ++col) {
+		clips300[col].x = col * frameWidth;
+		clips300[col].y = 0;
+		clips300[col].w = frameWidth;
+		clips300[col].h = frameHeight;
+	}
+
+}
+
+void Tutorial::animate300(SDL_Renderer* renderer) {
+
+	if (rightClicks % 4 == 0) {
+		SDL_Rect* currentClip = &clips300[clips300_frame / 5];
+
+		SDL_Rect drect = { (SCREEN_WIDTH - currentClip->w) / 2, 100, 287, 408 };
+		SDL_RenderCopy(renderer, characterTextures[0], currentClip, &drect);
+
 		SDL_RenderPresent(renderer);
 
-		
+
+		++clips300_frame;
+		if (clips300_frame / 5 >= 10) {
+			clips300_frame = 0;
+		}
 	}
-	SDL_Delay(1000 / 5);
-	}
+}
+
 	
 
 

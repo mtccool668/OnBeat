@@ -30,10 +30,10 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	ContentHandler contentLoader("Onbeat", SCREEN_WIDTH, SCREEN_HEIGHT);
-	contentLoader.createGameTextures();
-	SDL_Window* window = contentLoader.getWindow();
-	SDL_Renderer* renderer = contentLoader.getRenderer();
+	ContentHandler contentHandler("Onbeat", SCREEN_WIDTH, SCREEN_HEIGHT);
+	contentHandler.createGameTextures();
+	SDL_Window* window = contentHandler.getWindow();
+	SDL_Renderer* renderer = contentHandler.getRenderer();
 	
 	printf("finished creating game\n");
 	SDL_SetWindowInputFocus(window);
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 	//Level Screen
 	
 	bool quit = false;
-
+	int frame = 0;
 	screen screenID = MAIN_MENU;
 	while (!quit) {
 		switch (screenID) {
@@ -64,13 +64,13 @@ int main(int argc, char* argv[]) {
 			break;
 
 		case TUTORIAL:
-			tutorial.render300(renderer);
 			mainMenu.reset();
 			tutorial.update();
 			tutorial.renderAssets(renderer);
 			tutorial.renderLeft(renderer);
 			tutorial.renderRight(renderer);
-			
+			tutorial.render300();
+			tutorial.animate300(renderer);
 			screenID = tutorial.getScreen();
 			break;
 		}

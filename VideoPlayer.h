@@ -1,16 +1,10 @@
 #pragma once
 #include "SDL2.h"
+#include "ContentHandler.h"
 #include "tools.h"
 
-class VideoPlayer
-{
-public:
-	
-	VideoPlayer(SDL_Renderer* renderer, const std::string& folderPath);
-	void playVideo(SDL_Renderer* renderer, const std::string& folderPath, int targetFrameRate);
 
-private:
-	const std::string& folderPath;
-	SDL_Renderer* renderer;
-};
+void render300(SDL_Renderer* renderer, SDL_Texture* textures[], int textureID, int width, int height, 
+	int rows, int cols, int frameCount, int targetFrameRate);
+
 

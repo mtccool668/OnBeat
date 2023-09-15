@@ -46,15 +46,11 @@ int main(int argc, char* argv[]) {
 
 	//Main Menu Screen
 	MainMenu mainMenu(renderer);
-	mainMenu.render(renderer);
 
 	//Tutorial Screen
 	Tutorial tutorial(renderer);
-	tutorial.render(renderer);
 	//Level Screen
 	
-
-
 	bool quit = false;
 
 	screen screenID = MAIN_MENU;
@@ -68,9 +64,13 @@ int main(int argc, char* argv[]) {
 			break;
 
 		case TUTORIAL:
+			tutorial.render300(renderer);
 			mainMenu.reset();
 			tutorial.update();
-			tutorial.render(renderer);
+			tutorial.renderAssets(renderer);
+			tutorial.renderLeft(renderer);
+			tutorial.renderRight(renderer);
+			
 			screenID = tutorial.getScreen();
 			break;
 		}

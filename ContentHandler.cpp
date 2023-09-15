@@ -12,7 +12,7 @@ ContentHandler::ContentHandler(const char* title, int SCREEN_WIDTH, int SCREEN_H
 
 
 	//Create Renderer
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (!renderer) {
 		printf("SDL_CreateRenderer error\n");
 	}
@@ -34,14 +34,15 @@ void ContentHandler::createGameTextures() {
 	SDL_Texture* girlTexture = loadTexture("images/charMC.png");
 	SDL_Texture* titleTexture = loadTexture("images/title.png");
 	SDL_Texture* menuSheet = loadTexture("images/menu_sheet.png");
-	SDL_Texture* tutorial1_base = loadTexture("images/tutorial1_base.png");
 	SDL_Texture* tutorial1 = loadTexture("images/tutorial1.png");
+	SDL_Texture* girl_sheet = loadTexture("images/girl_sheet.png");
+
 
 	//Background Textures
 	bkgTextures[0] = bkgTexture;
 	
 	//Character Textures
-	characterTextures[0] = girlTexture;
+	characterTextures[0] = girl_sheet;
 	
 	//Font Textures
 	fontTextures[0] = titleTexture;
@@ -50,8 +51,7 @@ void ContentHandler::createGameTextures() {
 	buttonTextures[0] = menuSheet;
 	
 	//Entity Textures
-	entityTextures[0] = tutorial1_base;
-	entityTextures[1] = tutorial1;
+	entityTextures[0] = tutorial1;
 }
 
 SDL_Renderer* ContentHandler::getRenderer() const{

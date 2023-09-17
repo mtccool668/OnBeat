@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NotesTracker.cpp" />
     <ClCompile Include="ScoreTracker.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="ContentHandler.cpp" />
@@ -149,10 +150,12 @@
     <ClCompile Include="onbeat.cpp" />
     <ClCompile Include="metronome.cpp" />
     <ClCompile Include="assets.cpp" />
+    <ClCompile Include="Song.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NotesTracker.h" />
     <ClInclude Include="ScoreTracker.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="ContentHandler.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="metronome.h" />
     <ClInclude Include="SDL2.h" />
     <ClInclude Include="assets.h" />
+    <ClInclude Include="Song.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="Tutorial.h" />
   </ItemGroup>

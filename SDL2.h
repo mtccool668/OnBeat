@@ -1,6 +1,7 @@
 #pragma once
 #include "io.h"
 #include <SDL.h>
+#include <SDL_stdinc.h>
 #include <string>
 #include <stdio.h>
 #include <iostream>

@@ -17,18 +17,24 @@ public:
 		SIXTEENTH
 	};
 
-	NotesTracker(Song* song);
+	NotesTracker(Song* song, int tm);
+	
 	void setNoteType(int noteCount, int measures);
-	void setMeasureValues(Song* song);
+	
+	void setInterval(int BPM);
+	
+	float getInterval();
+	
+	void syncValues(float interval);
+	
 	std::vector<float> getMapValues();
 
 
 private:
-	SDL_TimerID syncValues;
-	static Uint32 sync(Uint32 interval, void *param);
-	Uint32 sync(Uint32 interval);
 	Note currentNote;
 	Song* currentSong;
+	float currentInterval;
+	int totalMeasures;
 	
 
 };

@@ -1,14 +1,15 @@
 #include "NotesTracker.h"
 
 
-NotesTracker::NotesTracker(Song* song) {
+NotesTracker::NotesTracker(Song* song, int tm) {
 	currentSong = song;
 	currentNote = NONE;
-	syncValues = 0;
+	currentInterval = 0;
+	totalMeasures = tm;
 }
 	
-void NotesTracker::setNoteType(int noteCount, int measures) {
-	int type = noteCount / measures;
+void NotesTracker::setNoteType(int noteCount, int totalMeasures) {
+	int type = noteCount / totalMeasures;
 	switch (type) {
 	case 1:
 		currentNote = WHOLE;
@@ -28,32 +29,38 @@ void NotesTracker::setNoteType(int noteCount, int measures) {
 }
 
 
-Uint32 NotesTracker::callback(Uint32 interval, void* param) {
-	NotesTracker* timer = static_cast<NotesTracker*>(param);
-	return timer->sync(interval);
-}
 
-Uint32 NotesTracker::sync(Uint32 interval) {
-	currentSong->mapValues.push_back((float)SDL_GetTicks());
-	return interval;
-}
 
-void NotesTracker::setMeasureValues(Song* song) {
-	int interval = 60000 / song->getSongBPM();
+void NotesTracker::setInterval(int BPM) {
+	float interval = 60000 / (float)BPM;
 	if (currentNote == EIGHTH) {
 		interval /= 2;
 	}
 	else if (currentNote == SIXTEENTH) {
 		interval /= 4;
 	}
-
-	SDL_TimerID syncValues = SDL_AddTimer(interval, sync, NULL);
+	
+	currentInterval = interval;
 	
 
+}
+
+void NotesTracker::syncValues(float interval) {
+	printf("%f\n", interval);
+	int prevTime = SDL_GetTicks();
+	int currTime = 0;
+	for (int i = 0; i < totalMeasures * 4; i++) {
+		currTime = SDL_GetTicks();
+		currentSong->mapValues.push_back((float)interval);
+	}
 }
 
 
 std::vector<float> NotesTracker::getMapValues() {
 	return currentSong->mapValues;
+}
+
+float NotesTracker::getInterval() {
+	return currentInterval;
 }
 

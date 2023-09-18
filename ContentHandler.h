@@ -14,6 +14,8 @@ public:
 
 	SDL_Texture* loadTexture(const char* filePath);
 
+	SDL_Texture* loadFont(const char* filePath, SDL_Color textColor, int fontSize);
+
 	void createGameTextures();
 
 	SDL_Window* getWindow() const;

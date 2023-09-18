@@ -4,9 +4,9 @@
 class Song
 {
 public:
-	Song(const char* name);
-	const char* getSongName();
-	int getSongBPM();
+	Song(const char* name, int BPM);
+	const char* getName();
+	int getBPM();
 
 	std::vector<float> mapValues;
 	

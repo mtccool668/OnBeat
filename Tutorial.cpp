@@ -18,10 +18,9 @@ ButtonName Tutorial::getButton(int mouseX, int mouseY) {
 
 void Tutorial::update() {
 	SDL_Event event;
-
 	while (SDL_PollEvent(&event))
 	{
-		
+
 		switch (event.type)
 		{
 		case SDL_QUIT:
@@ -42,6 +41,7 @@ void Tutorial::update() {
 					rightClicks = 0;
 					repeat = true;
 				}
+				printf("%f\n", (float)SDL_GetTicks());
 				rightClicks += 1;
 				break;
 
@@ -54,7 +54,7 @@ void Tutorial::update() {
 				break;
 			}
 
-		
+
 
 		}
 
@@ -93,7 +93,30 @@ void Tutorial::animate300(SDL_Renderer* renderer) {
 	}
 }
 
-	
+/*void Tutorial::renderButtons() {
+	switch (buttonState) {
+	case NORMAL:
+		SDL_RenderCopy(renderer, buttonTextures[0], &srects[0], &drects[0]); // Render start button
+		break;
+
+	case HOVER:
+		switch (buttonName) {
+		case PLAY:
+			SDL_RenderCopy(renderer, buttonTextures[0], &srects[1], &drects[1]); // Render start button
+			break;
+		}
+
+	case PRESS:
+		switch (buttonName) {
+		case PLAY:
+			SDL_RenderCopy(renderer, buttonTextures[0], &srects[1], &drects[1]); // Render start button
+			break;
+		}e
+		
+
+	}
+}
+*/
 
 
 void Tutorial::renderAssets(SDL_Renderer* renderer) {
@@ -101,7 +124,11 @@ void Tutorial::renderAssets(SDL_Renderer* renderer) {
 
 	SDL_Rect drect = { (SCREEN_WIDTH - 950) / 2, 50, 950, 310 };
 	SDL_RenderCopy(renderer, fontTextures[0], nullptr, &drect);
+	
+	drect = { SCREEN_WIDTH / 2, 100, 850, 75 };
+	SDL_RenderCopy(renderer, fontTextures[1], nullptr, &drect);
 }
+
 
 void Tutorial::renderLeft(SDL_Renderer* renderer) {
 	SDL_Rect drect = { 0, 300, 1011, 1145 };

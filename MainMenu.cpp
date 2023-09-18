@@ -110,7 +110,7 @@ void MainMenu::render(SDL_Renderer* renderer) {
 	switch (buttonState) {
 	case NORMAL:
 		SDL_RenderCopy(renderer, buttonTextures[0], &srects[0], &drects[0]); // Render Play button
-		SDL_RenderCopy(renderer, buttonTextures[0], &srects[2], &drects[2]); // Render Exit butto
+		SDL_RenderCopy(renderer, buttonTextures[0], &srects[2], &drects[2]); // Render Exit button
 		break;
 
 	case HOVER:

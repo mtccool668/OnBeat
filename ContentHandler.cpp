@@ -29,13 +29,42 @@ SDL_Texture* ContentHandler::loadTexture(const char* filePath) {
 	return texture;
 }
 
+SDL_Texture* ContentHandler::loadFont(const char* filePath, SDL_Color textColor, int fontSize) {
+	TTF_Font* font = TTF_OpenFont(filePath, fontSize);
+	if (!font) {
+		printf("can't load font\n");
+	}
+	SDL_Surface* textSurface = TTF_RenderText_Solid(font, "Press anywhere to start!", textColor);
+	if (!textSurface) {
+		printf("can't load text surface\n");
+	}
+	SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+	if (!textTexture) {
+		printf("can't render text texture\n");
+	}
+	int textWidth, textHeight;
+	if (TTF_SizeText(font, "Press anywhere to start!", &textWidth, &textHeight) != 0) {
+		printf("can't get dimensions of font box\n");
+	}
+	SDL_FreeSurface(textSurface);
+	TTF_CloseFont(font);
+
+	return textTexture;
+}
+
+
 void ContentHandler::createGameTextures() {
+	//PNG textures
 	SDL_Texture* bkgTexture = loadTexture("images/home_bkg.png");
 	SDL_Texture* girlTexture = loadTexture("images/charMC.png");
 	SDL_Texture* titleTexture = loadTexture("images/title.png");
 	SDL_Texture* menuSheet = loadTexture("images/menu_sheet.png");
 	SDL_Texture* tutorial1 = loadTexture("images/tutorial1.png");
 	SDL_Texture* girl_sheet = loadTexture("images/girl_sheet.png");
+
+	//FONT textures
+	SDL_Texture* shortbaby = loadFont("fonts/shortbaby.ttf", { 0, 0, 0 }, 18);
+
 
 
 	//Background Textures
@@ -46,6 +75,7 @@ void ContentHandler::createGameTextures() {
 	
 	//Font Textures
 	fontTextures[0] = titleTexture;
+	fontTextures[1] = shortbaby;
 	
 	//Button Textures
 	buttonTextures[0] = menuSheet;
@@ -53,6 +83,7 @@ void ContentHandler::createGameTextures() {
 	//Entity Textures
 	entityTextures[0] = tutorial1;
 }
+
 
 SDL_Renderer* ContentHandler::getRenderer() const{
 	return renderer;

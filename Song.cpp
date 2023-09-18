@@ -1,17 +1,17 @@
 #include "Song.h"
 
-Song::Song(const char* name) {
+Song::Song(const char* name, int bpm){
 	
 	songName = name;
-	BPM = 0;
+	BPM = bpm;
 
 
 }
 
-const char* Song::getSongName() {
+const char* Song::getName() {
 	return songName;
 }
 
-int Song::getSongBPM() {
+int Song::getBPM() {
 	return BPM;
 }

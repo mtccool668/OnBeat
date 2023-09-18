@@ -20,6 +20,7 @@ public:
 	ButtonName getButton(int mouseX, int mouseY);
 	void animate300(SDL_Renderer* renderer);
 	void render300();
+	void renderButtons();
 	void renderAssets(SDL_Renderer* renderer);
 	void renderLeft(SDL_Renderer* renderer);
 	void renderRight(SDL_Renderer* renderer);
@@ -34,5 +35,8 @@ private:
 	int leftClicks;
 	int rightClicks;
 	bool repeat;
+
+	//SDL_Rect srects[4];
+	//SDL_Rect drects[4];
 };
 

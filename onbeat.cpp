@@ -5,6 +5,7 @@
 #include "ContentHandler.h"
 #include "Tutorial.h"
 #include "assets.h"
+#include "playTutorial.h"
 
 
 bool init() {
@@ -18,6 +19,11 @@ bool init() {
 	//Open SDL_Mixer (audio program)
 	if (Mix_OpenAudio(48000, MIX_DEFAULT_FORMAT, 2, 64) < 0) {
 		printf("SDL_mixer bad: %s\n", Mix_GetError());
+	}
+
+	//open ttf font
+	if (TTF_Init() < 0) {
+		return 1;
 	}
 
 	return true;
@@ -49,6 +55,7 @@ int main(int argc, char* argv[]) {
 
 	//Tutorial Screen
 	Tutorial tutorial(renderer);
+	playTutorial();
 	//Level Screen
 	
 	bool quit = false;
@@ -72,16 +79,16 @@ int main(int argc, char* argv[]) {
 			tutorial.render300();
 			tutorial.animate300(renderer);
 			screenID = tutorial.getScreen();
-			break;
 		}
 
 		SDL_RenderPresent(renderer);
 	}
 	SDL_QuitSubSystem(SDL_INIT_VIDEO && SDL_INIT_AUDIO);
-	IMG_Quit();
 	contentHandler.destroyGameTextures();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 	return 1;
 

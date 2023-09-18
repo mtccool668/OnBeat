@@ -51,6 +51,9 @@
     <ClCompile Include="Song.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="playTutorial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDL2.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Song.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="playTutorial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

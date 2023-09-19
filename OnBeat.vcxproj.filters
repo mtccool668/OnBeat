@@ -24,7 +24,7 @@
     <ClCompile Include="Tools\VideoPlayer.cpp" />
     <ClCompile Include="Trackers\NotesTracker.cpp" />
     <ClCompile Include="Trackers\ScoreTracker.cpp" />
-    <ClCompile Include="Tools\OnBeat.cpp" />
+    <ClCompile Include="OnBeat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\graphics.h" />

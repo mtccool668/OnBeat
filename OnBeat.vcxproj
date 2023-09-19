@@ -29,7 +29,7 @@
     <ClCompile Include="Tools\ContentHandler.cpp" />
     <ClCompile Include="Tools\MapPlayer.cpp" />
     <ClCompile Include="Tools\metronome.cpp" />
-    <ClCompile Include="Tools\OnBeat.cpp" />
+    <ClCompile Include="OnBeat.cpp" />
     <ClCompile Include="Tools\tools.cpp" />
     <ClCompile Include="Tools\VideoPlayer.cpp" />
     <ClCompile Include="Trackers\NotesTracker.cpp" />

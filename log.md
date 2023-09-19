@@ -1,4 +1,4 @@
-**9/19/23**
+9/19/23
 - started dev log
 - added new organization system
 - updated project assets

@@ -1,7 +1,8 @@
 #pragma once
-#include "SDL2.h"
-
-
+#include <SDL.h>
+#include <string>
+#include <SDL_mixer.h>
+#include <iostream>
 
 class Metronome
 {

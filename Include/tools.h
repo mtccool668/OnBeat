@@ -1,5 +1,9 @@
 #pragma once
-#include "SDL2.h"
+#include <SDL.h>
+#include <filesystem>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 
 void discardAllEvents(bool quit);
 

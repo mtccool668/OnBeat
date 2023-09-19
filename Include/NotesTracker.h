@@ -1,5 +1,6 @@
 #pragma once
-#include "SDL2.h"
+#include <SDL.h>
+#include <iostream>
 #include "Song.h"
 
 

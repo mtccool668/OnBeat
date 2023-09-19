@@ -1,11 +1,14 @@
-#include "SDL2.h"
+#include <SDL.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
 #include "metronome.h"
 #include "button.h"
 #include "MainMenu.h"
 #include "ContentHandler.h"
 #include "Tutorial.h"
 #include "assets.h"
-#include "playTutorial.h"
+#include "PlayTutorial.h"
 
 
 bool init() {
@@ -40,12 +43,12 @@ int main(int argc, char* argv[]) {
 	contentHandler.createGameTextures();
 	SDL_Window* window = contentHandler.getWindow();
 	SDL_Renderer* renderer = contentHandler.getRenderer();
-	
+
 	printf("finished creating game\n");
 	SDL_SetWindowInputFocus(window);
-	
+
 	//Load background music
-	Mix_Music* bkgMusic = Mix_LoadMUS("music/bkg_music.mp3");
+	Mix_Music* bkgMusic = Mix_LoadMUS("Resources/music/bkg_music.mp3");
 	if (Mix_PlayMusic(bkgMusic, -1) == -1) {
 		printf("music playback error: %s\n", Mix_GetError());
 	}
@@ -54,17 +57,17 @@ int main(int argc, char* argv[]) {
 	MainMenu mainMenu(renderer);
 
 	//Tutorial Screen
-	Tutorial tutorial(renderer);
-	playTutorial();
+	Tutorial* tutorial = new Tutorial(renderer);
+
 	//Level Screen
-	
+
 	bool quit = false;
 	int frame = 0;
 	screen screenID = MAIN_MENU;
 	while (!quit) {
 		switch (screenID) {
 		case MAIN_MENU:
-			tutorial.reset();
+			tutorial->reset();
 			mainMenu.update();
 			mainMenu.render(renderer);
 			screenID = mainMenu.getScreen();
@@ -72,13 +75,17 @@ int main(int argc, char* argv[]) {
 
 		case TUTORIAL:
 			mainMenu.reset();
-			tutorial.update();
-			tutorial.renderAssets(renderer);
-			tutorial.renderLeft(renderer);
-			tutorial.renderRight(renderer);
-			tutorial.render300();
-			tutorial.animate300(renderer);
-			screenID = tutorial.getScreen();
+			tutorial->update();
+			tutorial->renderAssets(renderer);
+			tutorial->renderLeft(renderer);
+			tutorial->renderRight(renderer);
+			tutorial->render300();
+			tutorial->animate300(renderer);
+			if (queue(tutorial)) {
+				startTutorial(tutorial, renderer);
+			}
+			screenID = tutorial->getScreen();
+
 		}
 
 		SDL_RenderPresent(renderer);

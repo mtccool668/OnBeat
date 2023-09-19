@@ -1,5 +1,7 @@
 #pragma once
-#include "SDL2.h"
+#include <SDL.h>
+#include <SDL_stdinc.h>
+#include <SDL_ttf.h>
 
 
 enum ButtonState {

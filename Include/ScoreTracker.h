@@ -1,6 +1,7 @@
 #pragma once
-#include "SDL2.h"
-
+#include <SDL.h>
+#include <vector>
+#include <iostream>
 class ScoreTracker
 {
 

@@ -55,15 +55,15 @@ SDL_Texture* ContentHandler::loadFont(const char* filePath, SDL_Color textColor,
 
 void ContentHandler::createGameTextures() {
 	//PNG textures
-	SDL_Texture* bkgTexture = loadTexture("images/home_bkg.png");
-	SDL_Texture* girlTexture = loadTexture("images/charMC.png");
-	SDL_Texture* titleTexture = loadTexture("images/title.png");
-	SDL_Texture* menuSheet = loadTexture("images/menu_sheet.png");
-	SDL_Texture* tutorial1 = loadTexture("images/tutorial1.png");
-	SDL_Texture* girl_sheet = loadTexture("images/girl_sheet.png");
+	SDL_Texture* bkgTexture = loadTexture("Resources/images/home_bkg.png");
+	SDL_Texture* girlTexture = loadTexture("Resources/images/charMC.png");
+	SDL_Texture* titleTexture = loadTexture("Resources/images/title.png");
+	SDL_Texture* menuSheet = loadTexture("Resources/images/menu_sheet.png");
+	SDL_Texture* tutorial1 = loadTexture("Resources/images/tutorial1.png");
+	SDL_Texture* girl_sheet = loadTexture("Resources/images/girl_sheet.png");
 
 	//FONT textures
-	SDL_Texture* shortbaby = loadFont("fonts/shortbaby.ttf", { 0, 0, 0 }, 18);
+	SDL_Texture* shortbaby = loadFont("Resources/fonts/shortbaby.ttf", { 0, 0, 0 }, 18);
 
 
 
